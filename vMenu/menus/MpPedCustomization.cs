@@ -216,20 +216,20 @@ namespace vMenuClient.menus
 
             /*
 
-            0               Blemishes             0 - 23,   255  
-            1               Facial Hair           0 - 28,   255  
-            2               Eyebrows              0 - 33,   255  
-            3               Ageing                0 - 14,   255  
-            4               Makeup                0 - 74,   255  
-            5               Blush                 0 - 6,    255  
-            6               Complexion            0 - 11,   255  
-            7               Sun Damage            0 - 10,   255  
-            8               Lipstick              0 - 9,    255  
-            9               Moles/Freckles        0 - 17,   255  
-            10              Chest Hair            0 - 16,   255  
-            11              Body Blemishes        0 - 11,   255  
-            12              Add Body Blemishes    0 - 1,    255  
-            
+            0               Blemishes             0 - 23,   255
+            1               Facial Hair           0 - 28,   255
+            2               Eyebrows              0 - 33,   255
+            3               Ageing                0 - 14,   255
+            4               Makeup                0 - 74,   255
+            5               Blush                 0 - 6,    255
+            6               Complexion            0 - 11,   255
+            7               Sun Damage            0 - 10,   255
+            8               Lipstick              0 - 9,    255
+            9               Moles/Freckles        0 - 17,   255
+            10              Chest Hair            0 - 16,   255
+            11              Body Blemishes        0 - 11,   255
+            12              Add Body Blemishes    0 - 1,    255
+
             */
 
 
@@ -600,6 +600,7 @@ namespace vMenuClient.menus
             var leftLegTattoosList = new List<string>();
             var rightLegTattoosList = new List<string>();
             var badgeTattoosList = new List<string>();
+            var hairTattoosList = new List<string>();//head tattoo
 
             TattoosData.GenerateTattoosData();
             if (male)
@@ -644,6 +645,13 @@ namespace vMenuClient.menus
                 foreach (var tattoo in MaleTattoosCollection.BADGES)
                 {
                     badgeTattoosList.Add($"Badge #{counter} (of {MaleTattoosCollection.BADGES.Count})");
+                    counter++;
+                }
+                //headtattoo
+                counter = 1;
+                foreach (var tattoo in MaleTattoosCollection.HAIR)
+                {
+                    hairTattoosList.Add($"Tattoo #{counter} (of {MaleTattoosCollection.HAIR.Count})");
                     counter++;
                 }
             }
@@ -691,6 +699,13 @@ namespace vMenuClient.menus
                     badgeTattoosList.Add($"Badge #{counter} (of {FemaleTattoosCollection.BADGES.Count})");
                     counter++;
                 }
+                //headtattoo
+                counter = 1;
+                foreach (var tattoo in FemaleTattoosCollection.HAIR)
+                {
+                    hairTattoosList.Add($"Tattoo #{counter} (of {FemaleTattoosCollection.HAIR.Count})");
+                    counter++;
+                }
             }
 
             const string tatDesc = "Cycle through the list to preview tattoos. If you like one, press enter to select it, selecting it will add the tattoo if you don't already have it. If you already have that tattoo then the tattoo will be removed.";
@@ -701,6 +716,7 @@ namespace vMenuClient.menus
             var leftLegTatts = new MenuListItem("Left Leg Tattoos", leftLegTattoosList, 0, tatDesc);
             var rightLegTatts = new MenuListItem("Right Leg Tattoos", rightLegTattoosList, 0, tatDesc);
             var badgeTatts = new MenuListItem("Badge Overlays", badgeTattoosList, 0, tatDesc);
+            var hairTatts = new MenuListItem("Hair Tattoos", hairTattoosList, 0, tatDesc); //headtattoo
 
             tattoosMenu.AddMenuItem(headTatts);
             tattoosMenu.AddMenuItem(torsoTatts);
@@ -709,6 +725,7 @@ namespace vMenuClient.menus
             tattoosMenu.AddMenuItem(leftLegTatts);
             tattoosMenu.AddMenuItem(rightLegTatts);
             tattoosMenu.AddMenuItem(badgeTatts);
+            tattoosMenu.AddMenuItem(hairTatts);//headtattoo
             tattoosMenu.AddMenuItem(new MenuItem("Remove All Tattoos", "Click this if you want to remove all tattoos and start over."));
             #endregion
 
@@ -1441,26 +1458,26 @@ namespace vMenuClient.menus
 
             #region face shape data
             /*
-            Nose_Width  
-            Nose_Peak_Hight  
-            Nose_Peak_Lenght  
-            Nose_Bone_High  
-            Nose_Peak_Lowering  
-            Nose_Bone_Twist  
-            EyeBrown_High  
-            EyeBrown_Forward  
-            Cheeks_Bone_High  
-            Cheeks_Bone_Width  
-            Cheeks_Width  
-            Eyes_Openning  
-            Lips_Thickness  
-            Jaw_Bone_Width 'Bone size to sides  
-            Jaw_Bone_Back_Lenght 'Bone size to back  
-            Chimp_Bone_Lowering 'Go Down  
-            Chimp_Bone_Lenght 'Go forward  
-            Chimp_Bone_Width  
-            Chimp_Hole  
-            Neck_Thikness  
+            Nose_Width
+            Nose_Peak_Hight
+            Nose_Peak_Lenght
+            Nose_Bone_High
+            Nose_Peak_Lowering
+            Nose_Bone_Twist
+            EyeBrown_High
+            EyeBrown_Forward
+            Cheeks_Bone_High
+            Cheeks_Bone_Width
+            Cheeks_Width
+            Eyes_Openning
+            Lips_Thickness
+            Jaw_Bone_Width 'Bone size to sides
+            Jaw_Bone_Back_Lenght 'Bone size to back
+            Chimp_Bone_Lowering 'Go Down
+            Chimp_Bone_Lenght 'Go forward
+            Chimp_Bone_Width
+            Chimp_Hole
+            Neck_Thikness
             */
 
             var faceFeaturesNamesList = new string[20]
@@ -1513,6 +1530,7 @@ namespace vMenuClient.menus
                 currentCharacter.PedTatttoos.LeftLegTattoos ??= new List<KeyValuePair<string, string>>();
                 currentCharacter.PedTatttoos.RightLegTattoos ??= new List<KeyValuePair<string, string>>();
                 currentCharacter.PedTatttoos.BadgeTattoos ??= new List<KeyValuePair<string, string>>();
+                currentCharacter.PedTatttoos.HairTattoos ??= new List<KeyValuePair<string, string>>();//headtattoo
             }
 
             void ApplySavedTattoos()
@@ -1548,6 +1566,13 @@ namespace vMenuClient.menus
                 {
                     SetPedDecoration(Game.PlayerPed.Handle, (uint)GetHashKey(tattoo.Key), (uint)GetHashKey(tattoo.Value));
                 }
+
+                //headtattoo
+                foreach (var tattoo in currentCharacter.PedTatttoos.HairTattoos)
+                {
+                    SetPedDecoration(Game.PlayerPed.Handle, (uint)GetHashKey(tattoo.Key), (uint)GetHashKey(tattoo.Value));
+                }
+
 
                 if (!string.IsNullOrEmpty(currentCharacter.PedAppearance.HairOverlay.Key) && !string.IsNullOrEmpty(currentCharacter.PedAppearance.HairOverlay.Value))
                 {
@@ -1626,6 +1651,16 @@ namespace vMenuClient.menus
                     var Tattoo = currentCharacter.IsMale ? MaleTattoosCollection.BADGES.ElementAt(tattooIndex) : FemaleTattoosCollection.BADGES.ElementAt(tattooIndex);
                     var tat = new KeyValuePair<string, string>(Tattoo.collectionName, Tattoo.name);
                     if (!currentCharacter.PedTatttoos.BadgeTattoos.Contains(tat))
+                    {
+                        SetPedDecoration(Game.PlayerPed.Handle, (uint)GetHashKey(tat.Key), (uint)GetHashKey(tat.Value));
+                    }
+                }
+
+                else if (menuIndex == 7) // headtattoo
+                {
+                    var Tattoo = currentCharacter.IsMale ? MaleTattoosCollection.HAIR.ElementAt(tattooIndex) : FemaleTattoosCollection.HAIR.ElementAt(tattooIndex);
+                    var tat = new KeyValuePair<string, string>(Tattoo.collectionName, Tattoo.name);
+                    if (!currentCharacter.PedTatttoos.HairTattoos.Contains(tat))
                     {
                         SetPedDecoration(Game.PlayerPed.Handle, (uint)GetHashKey(tat.Key), (uint)GetHashKey(tat.Value));
                     }
@@ -1742,6 +1777,22 @@ namespace vMenuClient.menus
                     }
                 }
 
+                else if (menuIndex == 7) // headtattoo
+                {
+                    var Tattoo = currentCharacter.IsMale ? MaleTattoosCollection.HAIR.ElementAt(tattooIndex) : FemaleTattoosCollection.HAIR.ElementAt(tattooIndex);
+                    var tat = new KeyValuePair<string, string>(Tattoo.collectionName, Tattoo.name);
+                    if (currentCharacter.PedTatttoos.HairTattoos.Contains(tat))
+                    {
+                        Subtitle.Custom($"Tattoo #{tattooIndex + 1} has been ~r~removed~s~.");
+                        currentCharacter.PedTatttoos.HairTattoos.Remove(tat);
+                    }
+                    else
+                    {
+                        Subtitle.Custom($"Tattoo #{tattooIndex + 1} has been ~g~added~s~.");
+                        currentCharacter.PedTatttoos.HairTattoos.Add(tat);
+                    }
+                }
+
                 ApplySavedTattoos();
 
             };
@@ -1757,6 +1808,7 @@ namespace vMenuClient.menus
                 currentCharacter.PedTatttoos.LeftLegTattoos.Clear();
                 currentCharacter.PedTatttoos.RightLegTattoos.Clear();
                 currentCharacter.PedTatttoos.BadgeTattoos.Clear();
+                currentCharacter.PedTatttoos.HairTattoos.Clear();//headattoo
                 ClearPedDecorations(Game.PlayerPed.Handle);
             };
 
@@ -3229,10 +3281,10 @@ namespace vMenuClient.menus
             SetPedHeadOverlayColor(pedHandle, 8, 2, appData.lipstickColor, appData.lipstickColor);
             // moles and freckles
             SetPedHeadOverlay(pedHandle, 9, appData.molesFrecklesStyle, appData.molesFrecklesOpacity);
-            // chest hair 
+            // chest hair
             SetPedHeadOverlay(pedHandle, 10, appData.chestHairStyle, appData.chestHairOpacity);
             SetPedHeadOverlayColor(pedHandle, 10, 1, appData.chestHairColor, appData.chestHairColor);
-            // body blemishes 
+            // body blemishes
             SetPedHeadOverlay(pedHandle, 11, appData.bodyBlemishesStyle, appData.bodyBlemishesOpacity);
             // eyecolor
             SetPedEyeColor(pedHandle, appData.eyeColor);
@@ -3313,6 +3365,12 @@ namespace vMenuClient.menus
                 character.PedTatttoos.BadgeTattoos = new List<KeyValuePair<string, string>>();
             }
 
+            if (character.PedTatttoos.HairTattoos == null) //headtattoo
+            {
+                character.PedTatttoos.HairTattoos = new List<KeyValuePair<string, string>>();
+            }
+
+
             foreach (var tattoo in character.PedTatttoos.HeadTattoos)
             {
                 SetPedDecoration(pedHandle, (uint)GetHashKey(tattoo.Key), (uint)GetHashKey(tattoo.Value));
@@ -3340,6 +3398,11 @@ namespace vMenuClient.menus
             foreach (var tattoo in character.PedTatttoos.BadgeTattoos)
             {
                 SetPedDecoration(pedHandle, (uint)GetHashKey(tattoo.Key), (uint)GetHashKey(tattoo.Value));
+            }
+            //headtattoo
+            foreach (var tattoo in currentCharacter.PedTatttoos.HairTattoos)
+            {
+                SetPedDecoration(Game.PlayerPed.Handle, (uint)GetHashKey(tattoo.Key), (uint)GetHashKey(tattoo.Value));
             }
             #endregion
         }

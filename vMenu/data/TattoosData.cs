@@ -16,7 +16,8 @@ namespace vMenuClient.data
         ZONE_LEFT_LEG = 4,
         ZONE_RIGHT_LEG = 5,
         ZONE_UNKNOWN = 6,
-        ZONE_NONE = 7
+        ZONE_NONE = 7,
+        ZONE_HAIR = 8 //headtattoo
     }
 
     public struct Tattoo
@@ -54,6 +55,7 @@ namespace vMenuClient.data
         internal static List<Tattoo> LEFT_LEG = new();
         internal static List<Tattoo> RIGHT_LEG = new();
         internal static List<Tattoo> BADGES = new();
+        internal static List<Tattoo> HAIR = new(); //headtattoo
     }
 
     internal struct FemaleTattoosCollection
@@ -65,6 +67,7 @@ namespace vMenuClient.data
         internal static List<Tattoo> LEFT_LEG = new();
         internal static List<Tattoo> RIGHT_LEG = new();
         internal static List<Tattoo> BADGES = new();
+        internal static List<Tattoo> HAIR = new(); //headtattoo
     }
 
     internal static class TattoosData
@@ -162,6 +165,19 @@ namespace vMenuClient.data
                             FemaleTattoosCollection.BADGES.Add(tattoo);
                         }
                     }
+                    //headtattoo
+                    else if (tattoo.type == "TYPE_TATTOO" && tattoo.name.ToLower().Contains("hair_"))
+                    {
+                        if (tattoo.gender is 0 or 2)
+                        {
+                            MaleTattoosCollection.HAIR.Add(tattoo);
+                        }
+                        if (tattoo.gender is 1 or 2)
+                        {
+                            FemaleTattoosCollection.HAIR.Add(tattoo);
+                        }
+                    }
+
                     else if (tattoo.name.ToLower().Contains("hair_"))
                     {
                         if (tattoo.gender is 0 or 2)

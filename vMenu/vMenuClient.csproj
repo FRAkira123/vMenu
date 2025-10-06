@@ -5,7 +5,7 @@
     <Configurations>Release;Debug</Configurations>
     <AssemblyName>vMenuClient.net</AssemblyName>
     <TargetName>$(AssemblyName)</TargetName>
-    <OutputPath>..\build\vMenu\</OutputPath>
+    <OutputPath>..\..\..\resources\[MENU]\vMenu\</OutputPath>
     <DefineConstants>CLIENT</DefineConstants>
     <LangVersion>12.0</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -19,22 +19,22 @@
     <PackageReference Include="MenuAPI.FiveM" Version="3.2.2" />
 
     <Reference Include="Microsoft.CSharp" />
-    
+
     <PackageReference Include="CitizenFX.Core.Client" Version="1.0.10188">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
-    
+
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\dependencies\shared\Newtonsoft.Json.dll</HintPath>
       <Private>true</Private>
     </Reference>
 
   </ItemGroup>
-  
+
   <ItemGroup>
     <Resource Include="data\overlays.json" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -42,7 +42,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

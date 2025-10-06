@@ -30,6 +30,8 @@ namespace vMenuClient
             public List<KeyValuePair<string, string>> LeftLegTattoos;
             public List<KeyValuePair<string, string>> RightLegTattoos;
             public List<KeyValuePair<string, string>> BadgeTattoos;
+            public List<KeyValuePair<string, string>> HairTattoos; //headtattoo
+
         }
 
         // probably won't be needed, since there's already makeup and tattoos now.

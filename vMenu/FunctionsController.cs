@@ -1647,6 +1647,21 @@ namespace vMenuClient
                     {
                         TaskPlayAnim(Game.PlayerPed.Handle, "anim@random@shop_clothes@watches", "BASE", 8f, -8f, -1, 1, 0, false, false, false);
                     }
+
+                    //headtattoo-changestance
+                    else if (MenuController.GetCurrentMenu() == MainMenu.MpPedCustomizationMenu.clothesMenu)
+                    {
+                        if (!HasAnimDictLoaded("mp_sleep"))
+                        {
+                            RequestAnimDict("mp_sleep");
+                        }
+                        while (!HasAnimDictLoaded("mp_sleep"))
+                        {
+                            await Delay(0);
+                        }
+                        TaskPlayAnim(Game.PlayerPed.Handle, "mp_sleep", "bind_pose_180", 8f, -8f, -1, 1, 0, false, false, false);
+                    }
+
                     else
                     {
                         Game.PlayerPed.Task.ClearAll();
@@ -1911,12 +1926,15 @@ namespace vMenuClient
                         // 3 = right arm
                         2 or 3 => 6,
 
-                        // 4 = left leg 
+                        // 4 = left leg
                         // 5 = right leg
                         4 or 5 => 3,
 
                         // 6 = badges
                         6 => 2,
+
+                        //Headtattoo
+                        7 => 1,
 
                         _ => 0,
                     };
